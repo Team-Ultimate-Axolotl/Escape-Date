@@ -23,6 +23,18 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: ["style-loader", "css-loader", "sass-loader"],
       },
+      {
+        test: /\.(jpe?g|png|gif|woff|woff2|otf|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
+            use: [
+                {
+                    loader: 'url-loader',
+                    options: {
+                        limit: 1000,
+                        name : 'assets/img/[name].[ext]'
+                    }
+                }
+            ]
+      }
     ]
   },
   plugins: [
@@ -30,9 +42,9 @@ module.exports = {
       template: path.join(__dirname, "src", "index.html"),
     }),
   ],
-  devServer: {
-    proxy: {
-      '/**': 'http://localhost:3000/'
-    },
-  },
+  // devServer: {
+  //   proxy: {
+  //     '/**': 'http://localhost:3000/'
+  //   },
+  // },
 };
