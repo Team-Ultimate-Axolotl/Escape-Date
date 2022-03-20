@@ -1,12 +1,18 @@
 import React from 'react';
+import LoginInformation from './components/loginPage/LoginInformation.jsx';
+//import SignUpButton from './components/loginPage/SignUpButton.jsx';
+import logo from '../Images/Axolotl.png';
+//import { connect } = 'react-redux';
+
+
+
 
 const MainContainer = props => (
   <div className = 'container'>
-
-    <img src='./Images/axolotl.png'/>
+    <div className = 'logo'><img src={logo} alt = 'Logo'/></div>
 
     <LoginInformation />
-    <SignUpButton />
+    {/* <SignUpButton /> */}
 
   </div>
 
