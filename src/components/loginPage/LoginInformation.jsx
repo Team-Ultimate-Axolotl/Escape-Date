@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as actions from '../../actions/actions.js';
 import { bindActionCreators } from 'redux';
 
@@ -18,13 +18,15 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);
 
 
 const LoginInformation = props => (
-  <form className = 'input-text' onSubmit = {(e) => {
-    e.preventDefault();
-    props.logIn(e)}} >
-    <input type='text' placeholder='username' />
-    <input type='password' placeholder='password' />
-    <button>login</button>
-  </form>
+  <div className = 'form-container'>
+    <form className = 'input-text' onSubmit = {(e) => {
+      e.preventDefault();
+      props.logIn(e)}} >
+      <input type='text' placeholder='username' />
+      <input type='password' placeholder='password' />
+      <button>login</button>
+    </form>
+  </div>
 )
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginInformation);

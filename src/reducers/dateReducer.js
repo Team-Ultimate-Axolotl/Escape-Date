@@ -9,6 +9,7 @@ const initialState = {
     nameOfDate: '',
     timeOfDate: '',
     dateStatus: null, 
+    interval: null,
   };
 
 //spin up an initial statye and create a fall through of reducers.a
@@ -24,6 +25,18 @@ const dateReducer = ( state = initialState, action) => {
         name: action.payload.name,
         emergencyContacts: action.payload.emergencyContacts,
         primaryContact: action.payload.primaryContact
+      }
+    }
+    case types.NEW_DATE_INSTANCE : {
+      const { location, nameOfDate, timeOfDate, dateStatus, primaryContact, interval } = action.payload;
+      return {
+        ...state,
+        location, 
+        nameOfDate, 
+        timeOfDate, 
+        dateStatus, 
+        primaryContact, 
+        interval
       }
     }
     default: {
