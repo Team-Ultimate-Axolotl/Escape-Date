@@ -4,7 +4,8 @@ const initialState = {
     hasSignedIn: false,
     emergencyContacts: [],
     primaryContact: null, 
-    name : '', 
+    phoneNumber: null,
+    name : '',
     location: '',
     nameOfDate: '',
     timeOfDate: '',
@@ -19,14 +20,25 @@ const dateReducer = ( state = initialState, action) => {
     case types.LOG_IN : {
       //has signed in, emergency contact/primary, name of user.
       //console.log('at the reducer', action.payload);
-      return {
-        ...state,
-        hasSignedIn: true,
-        name: action.payload.name,
-        emergencyContacts: action.payload.emergencyContacts,
-        primaryContact: action.payload.primaryContact
+      if (!action.payload.err){
+      //grab the values for emergency contacts here and put them into an array of objects.
+      const arr = [];
+      for (let i = 1; i <= 3; i++){
+        arr.push({name: action.payload[`em${i}_name`], phone: action.payload[`em${i}_phone`] })
+      }
+      
+        return {
+          ...state,
+          hasSignedIn: true,
+          name: action.payload.name,
+          emergencyContacts: arr,
+          phoneNumber: action.payload.phone
+        }
+      } else {
+        return state
       }
     }
+    
     case types.NEW_DATE_INSTANCE : {
       const { location, nameOfDate, timeOfDate, dateStatus, primaryContact, interval } = action.payload;
       return {

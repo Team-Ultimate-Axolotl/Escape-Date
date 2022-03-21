@@ -48,7 +48,6 @@ export const signUp = (e) => dispatch => {
       payload: data
     })
   })
-  
 }
 
 export const newDateInstance = (e) => dispatch => {
