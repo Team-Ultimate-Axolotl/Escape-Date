@@ -9,54 +9,45 @@ newUser.create = (req, res, next) => {
   const password = req.body.password;
   const rounds = 10;
 
-  let hashed;
-
-  bcrypt.hash(password, rounds, (err, hash) => {
-
+// let hspw;
+bcrypt.genSalt(rounds, function(err, salt){
+  if (err){
+    throw err
+  } else {
+    bcrypt.hash(password, salt, function(err, hash){
       if (err) {
-          console.error(err)
-          return
-      }
-      console.log('hash is: ', hash)
-      hashed = hash;
-    //   return hash;
-  });
-//   const hashPass = async () => {
-//       const hashed = await bcrypt.hash(password, rounds);
-//       return hashed;
-      
-      
-//   }
-//   hashPass().then(() => {
-//       console.log()
-//   })
-//   console.log('REQUEST IS: ', req.body, hashed)
-  console.log('HASHED: ', hashed);
+        throw err
+      } else {
+        // hspw = hash;
+        // console.log(hspw, 'password success?', hash);
+        const queryString = `INSERT INTO users 
+        (username, password, name, phone, 
+        em1_name, em1_phone, em2_name, 
+        em2_phone, em3_name, em3_phone)
+        VALUES ('${req.body['username']}', 
+        '${hash}', 
+        '${req.body['name']}', 
+        '${req.body['phone']}', 
+        '${req.body['em1_name']}', 
+        '${req.body['em1_phone']}',
+        '${req.body['em2_name']}',
+        '${req.body['em2_phone']}', 
+        '${req.body['em3_name']}', 
+        '${req.body['em3_phone']}')
+        RETURNING *;`;
 
-    const queryString = `INSERT INTO users 
-    (username, password, name, phone, 
-    em1_name, em1_phone, em2_name, 
-    em2_phone, em3_name, em3_phone)
-    VALUES ('${req.body['username']}', 
-    '${hashed}', 
-    '${req.body['name']}', 
-    '${req.body['phone']}', 
-    '${req.body['em1_name']}', 
-    '${req.body['em1_phone']}',
-    '${req.body['em2_name']}',
-    '${req.body['em2_phone']}', 
-    '${req.body['em3_name']}', 
-    '${req.body['em3_phone']}')
-    RETURNING *;`;
-
-    db.query(queryString)
-      .then(() => {
-        console.log('WE MADE IT')
-        return next();
+        db.query(queryString)
+          .then(() => {
+            console.log('WE MADE IT')
+            return next();
+          })
+          .catch((err) => {
+            return next(err);
+          });
+        }
       })
-      .catch((err) => {
-        return next(err);
-      });
+    }
+  });
 }
 
 module.exports = newUser;
