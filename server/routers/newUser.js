@@ -5,7 +5,7 @@ const router = express.Router();
 const newUser = require('../controllers/newUserController')
 
 router.post('/newUser', newUser.create, (req, res) => {
-    return res.status(200)
+    return res.header('Access-Control-Allow-Origin', '*').status(200)
 })
 
 //router.delete('/newUser)

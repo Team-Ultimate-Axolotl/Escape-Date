@@ -12,6 +12,7 @@ import ErrorPage from './components/errorPage/ErrorPage.jsx';
 const MainContainer = props => (
   <div className = 'container'>
     <div className = 'logo'><img src={logo} alt = 'Logo'/></div>
+    <h1>Escape Date</h1>
       <Router>
         <Routes>
           <Route path = '/' element={<><LoginInformation/><SignUpButton/></>}/>

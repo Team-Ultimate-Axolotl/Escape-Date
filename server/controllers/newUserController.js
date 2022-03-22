@@ -5,6 +5,9 @@ const bcrypt = require('bcrypt');
 const newUser = {};
 
 newUser.create = (req, res, next) => {
+
+  console.log('Here is a body, and hopefully its here ', req.body);
+  
   const username = req.body.username;
   const password = req.body.password;
   const rounds = 10;

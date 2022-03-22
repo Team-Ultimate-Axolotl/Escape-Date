@@ -2,11 +2,13 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const PORT = 3000;
-// const cors = require = require('cors');
 // const bodyParser = require('body-parser');
+const cors = require('cors');
 const signInRouter = require('./routers/signIn');
 const newUser = require('./routers/newUser')
 const dateRouter = require('./routers/dateRouter');
+
+app.use(cors());
 
 
 app.use(express.static(path.resolve(__dirname, '../src')))

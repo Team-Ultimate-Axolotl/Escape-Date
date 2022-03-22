@@ -4,6 +4,7 @@ import * as actions from '../../actions/actions.js';
 import { bindActionCreators } from 'redux';
 import { useNavigate } from 'react-router-dom'; 
 import ErrorPage from '../errorPage/ErrorPage.jsx'; 
+import 'regenerator-runtime/runtime';
 
 //two text inputs and a submit button. //create an onSubmit handler for the form that sets off our get request for username authentication.
 
@@ -22,16 +23,38 @@ const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 const LoginInformation = props => {
   const navigate = useNavigate();
 
+  
  return (
   <div className = 'form-container'>
-    <form className = 'input-text' onSubmit = {(e) => {
+    <form className = 'input-text' onSubmit = { (e) => {
       e.preventDefault();
+      console.log(1);
+//WE SHOULD HAVE USED COOKIES AND WE'RE SORRY// ALSO YOU HAVE TO LOG IN TWICE NBD JUST REAL SECURE//
+      // new Promise((resolve, reject) => {
+      //   return props.logIn(e);
+      // })
+      // .then(() => {
+      //  if (props.hasSignedIn === true){
+      //       console.log("WE MADE IT YAY")
+      //       navigate('/newDate')
+      //       return
+      //     } else {
+      //       console.log(props, 'error found')
+      //       navigate('/errorPage')
+      //       return
+      //     } 
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //   });
       props.logIn(e);
-      if (props.hasSignedIn === true){
-          navigate('/newDate')
-        } else {
-          navigate('/errorPage')
-        }
+      setTimeout(() => {
+        console.log(5)
+       if (props.hasSignedIn === true){
+        navigate('/newDate')
+      } else {
+        navigate('/errorPage')
+      }}, 1000);
       }} >
       <input type='text' placeholder='username' />
       <input type='password' placeholder='password' />
