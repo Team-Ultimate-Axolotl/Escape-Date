@@ -7,6 +7,7 @@ const signIn = {};
 
 //check if user exists in database
 signIn.user = (request, response, next) => {
+    console.log('request is', request.body)
     const username = request.body.username;
     const password = request.body.password;
     const rounds = 10;
@@ -28,6 +29,7 @@ signIn.user = (request, response, next) => {
                         return 
                     }
                     if (res === true) {
+                        console.log('logged in')
                         response.locals.user = data.rows[0];
                         return next();
                     } else {

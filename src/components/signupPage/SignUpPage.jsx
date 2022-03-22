@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions/actions.js';
 import { bindActionCreators } from 'redux'; 
 import { useNavigate } from 'react-router-dom';
+//import { getState } from 'redux-thunk';
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
       
@@ -14,7 +15,9 @@ const SignUpPage = props => {
     <form className = 'sign-up-form' onSubmit = {(e) => {
     e.preventDefault(),
     props.signUp(e);
-    navigate('/newDate');
+    navigate('/');
+    const myState = store.getState();
+    console.log(myState);
     }}>
         <input type = 'text' placeholder = 'username'/>
         <input type = 'text' placeholder = 'password'/>

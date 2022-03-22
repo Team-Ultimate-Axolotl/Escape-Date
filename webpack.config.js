@@ -42,9 +42,10 @@ module.exports = {
       template: path.join(__dirname, "src", "index.html"),
     }),
   ],
-  // devServer: {
-  //   proxy: {
-  //     '/**': 'http://localhost:3000/'
-  //   },
-  // },
+  devServer: {
+    compress: true,
+    proxy: {
+      '/**': 'http://localhost:3000/'
+    },
+  },
 };
